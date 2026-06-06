@@ -4,6 +4,8 @@ A parametric OpenSCAD vase wrapped in a checkerboard of alternating outset / ins
 
 Available on MakerWorld: <https://makerworld.com/en/models/2817425-parametric-diamond-faceted-vase#profileId-3136959>
 
+**▶ [Live customizer](https://ochafik.com/openscad2/#url=https%3A%2F%2Fraw.githubusercontent.com%2Fbreckenedge%2Fparametric-alternating-diamond-vase%2Fmain%2Fknurled_vase.scad)** — tweak the parameters and preview the model in your browser (runs the real OpenSCAD via the [openscad-playground](https://github.com/openscad/openscad-playground) WASM build; collapse the editor panel to see just the sliders).
+
 ## Parameters
 
 | Parameter      | Default | Description                                                              |
