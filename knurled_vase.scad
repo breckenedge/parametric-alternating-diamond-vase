@@ -35,7 +35,8 @@ cell_aspect = 1;      // [0.25:0.05:3]
 
 /* [Floor] */
 
-// Solid floor thickness (mm); 0 = open bottom
+// Solid floor thickness (mm); 0 = open bottom. The bottom outer edge is
+// rounded with a corner radius equal to this height (a full quarter-round).
 floor_thick = 0;        // [0:0.5:10]
 
 /* [Hidden] */
@@ -113,11 +114,27 @@ top_faces = [
 all_faces = concat(cell_faces, bottom_faces, top_faces);
 
 // -------------------- Render --------------------
+// Floor disk whose bottom outer edge is rounded with a corner radius equal
+// to the floor height, leaving the top a flat _sides-gon flush with the
+// shell base. $fn = _sides keeps the side facets aligned to the knurled wall;
+// the quarter-round profile gets its own (smooth) resolution from `arc_steps`.
+module rounded_floor() {
+    r = floor_thick;
+    arc_steps = 24;
+    profile = concat(
+        [[0, 0]],
+        [for (k = [0 : arc_steps])
+            let(a = -90 * k / arc_steps)
+            [radius - r + r * cos(a), r * sin(a)]],
+        [[0, -floor_thick]]
+    );
+    rotate_extrude($fn = _sides) polygon(profile);
+}
+
 module knurled_vase() {
     union() {
         if (floor_thick > 0)
-            translate([0, 0, -floor_thick])
-                cylinder(r = radius, h = floor_thick, $fn = _sides);
+            rounded_floor();
         polyhedron(points = all_points, faces = all_faces, convexity = 10);
     }
 }
