@@ -35,8 +35,7 @@ cell_aspect = 1;      // [0.25:0.05:3]
 
 /* [Floor] */
 
-// Solid floor thickness (mm); 0 = open bottom. The bottom outer edge is
-// rounded with a corner radius equal to this height (a full quarter-round).
+// Solid floor thickness (mm); 0 = open bottom, bottom edge rounded to this radius
 floor_thick = 0;        // [0:0.5:10]
 
 /* [Hidden] */
